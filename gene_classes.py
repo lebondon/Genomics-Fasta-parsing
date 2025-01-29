@@ -24,9 +24,25 @@ class MitochondrialDNA(Gene):
         end = len(sequence) if end is None else end
         return sequence[start:end]
     
+    
     #return the lenght of the frequence
     def sequence_length(self):
         return len(self.sequence)
+    
+    
+    #return all the positions where a certain motif occur
+    def find_motif(self, motif: str):
+
+        motif = motif.upper()
+        positions = []
+        loc = 0
+        while True:
+            loc = self.sequence.find(motif, loc)        #gives back the location of where it found the motif
+            if loc == -1:
+                break
+            positions.append(loc)
+            loc += 1
+        return positions
     
     
     #percentage of GC content
