@@ -4,12 +4,15 @@ class Gene:
         self.__sequence_description = sequence_description
         self.__sequence = sequence
 
+    @property
     def sequence_id(self):
         return self.__sequence_id
     
+    @property
     def sequence_description(self):
         return self.__sequence_description
     
+    @property
     def sequence(self):
         return self.__sequence
     
