@@ -4,15 +4,12 @@ class Gene:
         self.__sequence_description = sequence_description
         self.__sequence = sequence
 
-    @property
     def sequence_id(self):
         return self.__sequence_id
     
-    @property
     def sequence_description(self):
         return self.__sequence_description
     
-    @property
     def sequence(self):
         return self.__sequence
     
@@ -27,18 +24,38 @@ class MitochondrialDNA(Gene):
         end = len(sequence) if end is None else end
         return sequence[start:end]
     
-    
+    #return the lenght of the frequence
     def sequence_length(self):
-        """Calculate the length of the sequence"""
         return len(self.sequence)
     
     
-    def GC_content(self):
-        """Calculate the GC content percentage"""
-        sequence = self.sequence
-        GC_count = sequence.count('G') + sequence.count('C')
-        percentage = (GC_count / len(sequence)) * 100
-        return f"{percentage}%"
+    #percentage of GC content
+    def GC_content_percentage(self):
+        sequence=self.sequence
+        GC_count=sequence.count('G') + sequence.count('C')
+        return f"{(GC_count/len(sequence))*100}%"
+
+    
+    #absolute frequency of each nucleotide base
+    def base_composition(self):
+
+        return {
+            'A': self.sequence.count('A'),
+            'C': self.sequence.count('C'),
+            'G': self.sequence.count('G'),
+            'T': self.sequence.count('T')
+        }
+
+    
+    #relative frequency of each nucleotide base
+    def base_composition_percentage(self):
+
+        return {
+            'A': (self.sequence.count('A')/len(self.sequence)*100),
+            'C': (self.sequence.count('C')/len(self.sequence)*100),
+            'G': (self.sequence.count('G')/len(self.sequence)*100),
+            'T': (self.sequence.count('T')/len(self.sequence)*100)
+        }
 
     
     
