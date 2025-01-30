@@ -84,17 +84,7 @@ class MitochondrialDNA(Gene):
 
 class BioPythonAligner:
     def align_sequences(self, seq1: str, seq2: str, method: str = 'global') -> Dict:
-        """
-        Align two sequences using Biopython's pairwise2
-        
-        Args:
-            seq1: First sequence
-            seq2: Second sequence
-            method: 'global' or 'local'
-            
-        Returns:
-            Dictionary with alignment results
-        """
+
         # Perform alignment
         align_func = pairwise2.align.globalms if method == 'global' else pairwise2.align.localms
         alignments = align_func(seq1, seq2, 2, -1, -0.5, -0.1)  # Default scoring
