@@ -6,10 +6,10 @@ from gene_classes import MitochondrialDNA, BioPythonAligner
 import plotly.express as px
 import plotly.graph_objects as go
 
-st.set_page_config(page_title="Mitochondrial DNA Analysis", layout="wide")
+st.set_page_config(page_title="DNA Analysis", layout="wide")
 
 def main():
-    st.title("Mitochondrial DNA Analysis Tool")
+    st.title("DNA Analysis Tool")
     
     # Sidebar for navigation
     page = st.sidebar.selectbox(
