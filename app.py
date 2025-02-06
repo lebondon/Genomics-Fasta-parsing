@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 from io import StringIO
-from farsa_parser import FastaParser
+from fasta_parser import FastaParser, detect_sequence_type
 from gene_classes import DNASequence, AmminoacidsSequence, BioPythonAligner
 import plotly.express as px
 import plotly.graph_objects as go
@@ -126,13 +126,10 @@ def main():
             with open("temp_fasta.txt", "w") as f:
                 f.write(stringio.read())
             
-            # Create parser instance
-            parser = FastaParser()
-            
             # Parse file and create sequence objects
-            st.session_state.data = parser.parse_file("temp_fasta.txt")
-            st.session_state.sequence_type = parser.detect_sequence_type(st.session_state.data)
-            st.session_state.sequence_objects = parser.create_sequence_objects(st.session_state.data)
+            st.session_state.data = FastaParser.parse_file("temp_fasta.txt")
+            st.session_state.sequence_type = detect_sequence_type(st.session_state.data)
+            st.session_state.sequence_objects = FastaParser.create_sequence_objects(st.session_state.data)
             
             # Show sequence type in sidebar
             st.sidebar.success(f"Detected {st.session_state.sequence_type} sequences")
@@ -221,7 +218,7 @@ def show_motif_analysis():
         
         with col1:
             # Default motif based on sequence type
-            default_motif = "ATCG" if isinstance(st.session_state.sequence_objects[0], DNASequence) else "KR"
+            default_motif = "ATCG" if st.session_state.sequence_type == "DNA" else "KR"
             motif = st.text_input(
                 "Enter motif sequence to search",
                 value=default_motif,

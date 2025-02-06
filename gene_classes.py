@@ -53,6 +53,7 @@ class Gene:
         base_comp=self.base_composition()
         for key in base_comp:     
             base_comp[key] = base_comp[key]/len(self.sequence)*100
+        return base_comp
     
     
     
