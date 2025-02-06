@@ -20,10 +20,6 @@ class Gene:
     def sequence(self):
         return self.__sequence
     
-    
-    
-class MitochondrialDNA(Gene):
-     
     def extract_subsequences(self, start=None, end=None):
         """Extract a subsequence from the DNA sequence"""
         sequence = self.sequence
@@ -52,6 +48,16 @@ class MitochondrialDNA(Gene):
         return positions
     
     
+    #relative frequency of each nucleotide base
+    def base_composition_percentage(self):
+        base_comp=self.base_composition()
+        for key in base_comp:     
+            base_comp[key] = base_comp[key]/len(self.sequence)*100
+    
+    
+    
+class DNASequence(Gene):
+         
     #percentage of GC content
     def GC_content_percentage(self):
         sequence=self.sequence
@@ -69,18 +75,40 @@ class MitochondrialDNA(Gene):
             'T': self.sequence.count('T')
         }
 
+
+        
+        
+class AmminoacidsSequence(Gene):
     
-    #relative frequency of each nucleotide base
-    def base_composition_percentage(self):
+        
+    #absolute frequency of each nucleotide base
+    def base_composition(self):
 
         return {
-            'A': (self.sequence.count('A')/len(self.sequence)*100),
-            'C': (self.sequence.count('C')/len(self.sequence)*100),
-            'G': (self.sequence.count('G')/len(self.sequence)*100),
-            'T': (self.sequence.count('T')/len(self.sequence)*100)
+            'G': self.sequence.count('G'),
+            'A': self.sequence.count('A'),
+            'V': self.sequence.count('V'),
+            'L': self.sequence.count('L'),
+            'I': self.sequence.count('I'),
+            'D': self.sequence.count('D'),
+            'E': self.sequence.count('E'),
+            'N': self.sequence.count('N'),
+            'Q': self.sequence.count('Q'),
+            'P': self.sequence.count('P'),
+            'F': self.sequence.count('F'),
+            'W': self.sequence.count('W'),
+            'K': self.sequence.count('K'),
+            'C': self.sequence.count('C'),
+            'M': self.sequence.count('M'),
+            'Y': self.sequence.count('Y'),
+            'R': self.sequence.count('R'),
+            'H': self.sequence.count('H'),
+            'S': self.sequence.count('S'),
+            'T': self.sequence.count('T')
         }
-        
-        
+
+    
+          
 
 class BioPythonAligner:
     def align_sequences(self, seq1: str, seq2: str, method: str = 'global') -> Dict:
