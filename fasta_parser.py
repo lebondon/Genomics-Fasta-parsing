@@ -75,7 +75,7 @@ class FastaParser:
         else:
             
             for sequence_id, row in df.iterrows():                
-                mtdna = DNASequence(
+                mtdna = AmminoacidsSequence(
                 sequence_id=sequence_id,
                 sequence_description=row['sequence_description'],
                 sequence=row['sequence']
